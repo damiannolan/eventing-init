@@ -20,7 +20,7 @@ func main() {
 		Jitter: false,
 	}
 
-	clusterAdmin := eventing.WaitForKafka(backoff, []string{config.KafkaSettings.Broker()}, config.SaramaConfig)
+	clusterAdmin := eventing.WaitForKafka(backoff, []string{config.KafkaSettings.Broker()}, config.SaramaConfig())
 	defer clusterAdmin.Close()
 
 	backoff.Reset()
