@@ -68,3 +68,36 @@ WaitForKafka:
 		return clusterAdmin
 	}
 }
+
+// WaitForTopics - Uses the provided sarama.ClusterAdmin to list cluster topics and waits until the required *TopicsList has been satisfied
+func WaitForTopics(backoff *backoff.Backoff, clusterAdmin sarama.ClusterAdmin, requiredTopics *TopicsList) {
+	log.Printf("Waiting for Required Topics - %s", requiredTopics.Topics())
+
+WaitForTopics:
+	for {
+		topics, err := clusterAdmin.ListTopics()
+		if err != nil {
+			log.Printf("Error: Failed to retrieve topics from Kafka - %v", err)
+
+			d := backoff.Duration()
+			log.Printf("Retrying in %v...", d)
+			time.Sleep(d)
+			continue WaitForTopics
+		}
+
+		for _, t := range requiredTopics.Topics() {
+			topicInfo, ok := topics[t]
+			if !ok {
+				log.Printf("Failed to find Topic - %s", t)
+
+				d := backoff.Duration()
+				log.Printf("Retrying in %v...", d)
+				time.Sleep(d)
+				continue WaitForTopics
+			}
+			log.Printf("Successfully found Topic: %s Metadata: [Partitions: %d ReplicationFactor: %d]", t, topicInfo.NumPartitions, topicInfo.ReplicationFactor)
+		}
+
+		return
+	}
+}
