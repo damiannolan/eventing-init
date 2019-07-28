@@ -15,8 +15,8 @@ metadata:
 data:
   topics.yml: |
     topics:
-    {{- range $key, $topic := .Values.topics }}
-      - { key: {{ $key | snakecase | upper | quote }}, name: {{ $topic | quote }} }
+    {{- range .Values.kafka.topics }}
+      - {{ . | quote }}
     {{- end }}
 ```
 
@@ -25,9 +25,10 @@ For Example:
 
 ```yaml
 ...
-topics:
-  notification: notification-events
-  request: request-events
+kafka:
+  topics:
+    - notification-events
+    - request-events
 ```
 
 An `initContainers` entry should be added to the service Deployment PodSpec with a `volumeMounts` entry specifying the associated ConfigMap.  
