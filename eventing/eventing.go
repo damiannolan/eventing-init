@@ -10,26 +10,14 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
-// Topic - Represents a KafkaTopic where Key is the data type and Name is the topic name
-type Topic struct {
-	Key  string `yaml:"key"`
-	Name string `yaml:"name"`
-}
-
-// TopicsList - Wrapper Struct to allow parsing of yaml to a slice of type Topic
+// TopicsList - Wrapper Struct to allow parsing of topics yaml to a slice of strings
 type TopicsList struct {
-	TopicsList []Topic `yaml:"topics"`
+	TopicsList []string `yaml:"topics"`
 }
 
 // Topics - Returns string slice containing the TopicsList's topic names
-func (t TopicsList) Topics() []string {
-	topics := []string{}
-
-	for _, topic := range t.TopicsList {
-		topics = append(topics, topic.Name)
-	}
-
-	return topics
+func (t *TopicsList) Topics() []string {
+	return t.TopicsList
 }
 
 // LoadTopics - Attempts to read the yaml file at the provided path and unmarshal to a *TopicsList
