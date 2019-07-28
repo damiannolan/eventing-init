@@ -53,3 +53,10 @@ spec:
       configMap:
       name: sevice-x-topics-config
 ```
+
+### TODO's
+
+- Cleanup config pkg
+- Add more configurability (Create topics if not exists option)
+- Use [logrus](https://github.com/sirupsen/logrus) for logging
+- Use [testify](https://github.com/stretchr/testify) for assertions
