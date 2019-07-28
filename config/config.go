@@ -11,8 +11,8 @@ import (
 const (
 	KafkaHost    = "kafka"
 	KafkaPort    = "9092"
-	KafkaVersion = "2.2.0"
-	TopicsPath   = "/opt/adp/topics.yml"
+	KafkaVersion = "2.3.0"
+	TopicsPath   = "/etc/config/topics.yml"
 )
 
 var (
