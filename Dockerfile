@@ -1,6 +1,8 @@
 # Build Env
 FROM golang:1.12 AS build-env
 
+ENV GO111MODULE=on
+
 ADD . /go/src/github.com/damiannolan/eventing-init
 
 WORKDIR /go/src/github.com/damiannolan/eventing-init
