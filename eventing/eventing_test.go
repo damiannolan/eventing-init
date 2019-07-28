@@ -8,41 +8,41 @@ const (
 	InvalidPath = "../testdata/invalid.yml"
 	SnippetPath = "../testdata/snippet.yml"
 	TopicsPath  = "../testdata/topics.yml"
-	TotalTopics = 4
+	TotalTopics = 3
 )
 
 func TestTopics(t *testing.T) {
-	topics := &TopicsList{
-		TopicsList: []Topic{
-			{Key: "INTERACTION", Name: "adp-interaction-events"},
-			{Key: "USER_SESSION", Name: "adp-user-session-events"},
+	topicsList := &TopicsList{
+		TopicsList: []string{
+			"notification-events",
+			"request-events",
 		},
 	}
 
-	topicNames := topics.Topics()
+	topicNames := topicsList.Topics()
 
-	if len(topicNames) != len(topics.TopicsList) {
+	if len(topicNames) != len(topicsList.Topics()) {
 		t.Errorf("TestTopics Failed: Expected len() to be equal")
 	}
 
-	for i, topic := range topics.TopicsList {
-		if topicNames[i] != topic.Name {
+	for i, topic := range topicsList.Topics() {
+		if topicNames[i] != topic {
 			t.Errorf("TestTopics Failed: Expected topic names to be equal")
 		}
 	}
 }
 
 func TestLoadTopics(t *testing.T) {
-	topics, err := LoadTopics(TopicsPath)
+	topicsList, err := LoadTopics(TopicsPath)
 	if err != nil {
 		t.Errorf("TestLoadTopics Failed: Error loading topics - %v", err)
 	}
-	if len(topics.TopicsList) != TotalTopics {
-		t.Errorf("TestLoadTopics Failed: Expected len() of %d but got %d", TotalTopics, len(topics.TopicsList))
+	if len(topicsList.TopicsList) != TotalTopics {
+		t.Errorf("TestLoadTopics Failed: Expected len() of %d but got %d", TotalTopics, len(topicsList.TopicsList))
 	}
 
-	topics, err = LoadTopics(SnippetPath)
-	if len(topics.TopicsList) != 0 {
+	topicsList, err = LoadTopics(SnippetPath)
+	if len(topicsList.TopicsList) != 0 {
 		t.Error("TestLoadTopics Failed: Expected error to not be nil")
 	}
 

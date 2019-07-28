@@ -1,5 +1,4 @@
 topics:
-  - { key: "CLIENT", name: "adp-client-events" }
-  - { key: "INTERACTION", name: "adp-interaction-events" }
-  - { key: "REQUEST", name: "adp-request-events" }
-  - { key: "USER_SESSION", name: "adp-user-session-events" }
+  - notification-events
+  - request-events
+  - user-events
