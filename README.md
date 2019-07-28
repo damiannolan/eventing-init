@@ -1,2 +1,3 @@
 # eventing-init
-A K8s Init Container as a wait mechanism for Kafka availability and Topic configuration
+
+A [Kubernetes Init Container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) as a wait mechanism for Kafka availability and topic configuration.
