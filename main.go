@@ -25,4 +25,11 @@ func main() {
 
 	backoff.Reset()
 
+	requiredTopics, err := eventing.LoadTopics(config.TopicsPath)
+	if err != nil {
+		log.Fatalf("Failed to load required topics - %v", err)
+	}
+
+	eventing.WaitForTopics(backoff, clusterAdmin, requiredTopics)
+	log.Println("Init Successfully Completed - All required topics are available")
 }
