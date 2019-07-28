@@ -2,9 +2,13 @@
 
 A [Kubernetes Init Container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) as a wait mechanism for Kafka availability and topic configuration.
 
+This project serves as a means to block service startup until Kafka eventing and topic dependencies have been fulfilled.
+
 ## Usage
 
-A ConfigMap should be provided with the required Kafka Topics.
+The following example assumes the use of [Helm](https://helm.sh/) (A Package manager for Kubernetes), however this is not a requirement and appropriate K8s manifests can be constructed without the use of Helm's templating functionality.
+
+1. A ConfigMap should be provided with the required Kafka Topics.
 For Example:
 
 ```yaml
@@ -20,7 +24,7 @@ data:
     {{- end }}
 ```
 
-Topic entries should be supplied through `values.yaml`
+2. Topic entries should be supplied through `values.yaml`
 For Example:
 
 ```yaml
@@ -31,7 +35,7 @@ kafka:
     - request-events
 ```
 
-An `initContainers` entry should be added to the service Deployment PodSpec with a `volumeMounts` entry specifying the associated ConfigMap.  
+3. An `initContainers` entry should be added to the service Deployment PodSpec with a `volumeMounts` entry specifying the associated ConfigMap.  
 For Example:
 
 ```yaml
