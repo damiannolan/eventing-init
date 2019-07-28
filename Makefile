@@ -1,4 +1,4 @@
-VERSION := 0.0.1
+VERSION := 0.1.0
 
 DOCKER_REG = damiannolan
 DOCKER_IMAGE = eventing-init
