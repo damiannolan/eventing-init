@@ -35,7 +35,8 @@ kafka:
     - request-events
 ```
 
-3. An `initContainers` entry should be added to the service Deployment PodSpec with a `volumeMounts` entry specifying the associated ConfigMap.  
+3. An `initContainers` entry should be added to the service Deployment PodSpec with a `volumeMounts` entry specifying the associated ConfigMap. Environment variables can be provided in the Container spec, if omitted the default configuration fallbacks are used for Kafka host, port and version.
+ 
 For Example:
 
 ```yaml
