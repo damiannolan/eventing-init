@@ -36,7 +36,7 @@ kafka:
 ```
 
 3. An `initContainers` entry should be added to the service Deployment PodSpec with a `volumeMounts` entry specifying the associated ConfigMap. Environment variables can be provided in the Container spec, if omitted the default configuration fallbacks are used for Kafka host, port and version.
- 
+
 For Example:
 
 ```yaml
@@ -57,7 +57,7 @@ spec:
 
 ### TODO's
 
-- Cleanup config pkg
+- Cleanup config pkg - possibly use [viper](https://github.com/spf13/viper)
 - Add more configurability (Create topics if not exists option)
 - Use [logrus](https://github.com/sirupsen/logrus) for logging
 - Use [testify](https://github.com/stretchr/testify) for assertions
